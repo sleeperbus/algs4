@@ -2,7 +2,6 @@ public class Percolation {
 	private WeightedQuickUnionUF uf;
 	private int size;
 	private int[] sitesOpen;
-	private int[] sitesFull;
 
 	// convert cordination to 1D Index.  x, y start from 1
 	private int xyTo1D(int x, int y) {
@@ -40,15 +39,10 @@ public class Percolation {
 		this.uf = new WeightedQuickUnionUF((N*N + 2));
 		this.size = N;
 		this.sitesOpen = new int[N*N];
-		this.sitesFull = new int[N*N];
 
 		// connect virtual top to top rows
 		for (int idx = 0; idx < this.size; idx++) {
 			this.uf.union(N*N, idx);
-		}
-		// connect virtual bottom to bottom rows
-		for (int idx = N*N - N; idx < N*N; idx++) {
-			this.uf.union(N*N + 1, 0);
 		}
 	}
 
@@ -73,14 +67,16 @@ public class Percolation {
 
 	// is site (row i, column j) full?
 	public boolean isFull(int i, int j) {
-		return true;
+		if (this.uf.connected(this.size * this.size, xyTo1D(i, j)))
+			return true;
+		return false;
 	}
 
 	// does the system percolate
 	public boolean percolates() {
-		return true;
+		if (this.uf.connected(this.size * this.size, this.size * this.size + 1)) return true;
+		return false;
 	}
-
 
 	public static void main(String[] args) {
 		
