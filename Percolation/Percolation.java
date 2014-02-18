@@ -36,13 +36,19 @@ public class Percolation {
 	}
 
 	public Percolation(int N) {
-		this.uf = new WeightedQuickUnionUF(N*N);
+		// 2 is for virtual sites, top & bottom
+		this.uf = new WeightedQuickUnionUF((N*N + 2));
 		this.size = N;
 		this.sitesOpen = new int[N*N];
 		this.sitesFull = new int[N*N];
-		for (int idx = 0; idx < N*N; idx++) {
-			this.sitesOpen[idx] = 0;
-			this.sitesFull[idx] = 0;
+
+		// connect virtual top to top rows
+		for (int idx = 0; idx < this.size; idx++) {
+			this.uf.union(N*N, idx);
+		}
+		// connect virtual bottom to bottom rows
+		for (int idx = N*N - N; idx < N*N; idx++) {
+			this.uf.union(N*N + 1, 0);
 		}
 	}
 
