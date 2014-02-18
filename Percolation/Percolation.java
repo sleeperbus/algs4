@@ -10,10 +10,15 @@ public class Percolation {
 
 	// check if indices are out of bounds
 	private boolean isBeyoundIndex(int i, int j) {
-		if (i <= 0 || i > this.size) throw new IndexOutOfBoundsException("row i out of bounds");
-		if (j <= 0 || j > this.size) throw new IndexOutOfBoundsException("column j out of bounds");
+		if (i <= 0 || i > this.size) return false;
+		if (j <= 0 || j > this.size) return false;
 		return true;
 	}
+
+	private void checkIndicesBounds(int i, int j) {
+		if (i <= 0 || i > this.size) throw new IndexOutOfBoundsException("row i out of bounds");
+		if (j <= 0 || j > this.size) throw new IndexOutOfBoundsException("column j out of bounds");
+	}	
 
 	private void connectWithNeighbors(int i, int j) {
 		// right
@@ -48,20 +53,18 @@ public class Percolation {
 
 	// open site (row i, column j) if it is not already
 	public void open(int i, int j) {
-		if (isBeyoundIndex(i, j)) {
-			int idx = this.sitesOpen[xyTo1D(i, j)];
-			if (idx == 0) {
-				this.sitesOpen[idx] = 1;
-			}
+		checkIndicesBounds(i, j);
+		int idx = this.sitesOpen[xyTo1D(i, j)];
+		if (idx == 0) {
+			this.sitesOpen[idx] = 1;
 		}
 		connectWithNeighbors(i, j);
 	}
 
 	// is site (row i, column j) open?
 	public boolean isOpen(int i, int j) {
-		if (isBeyoundIndex(i, j)) {
-			if (this.sitesOpen[xyTo1D(i, j)] == 1) return true;
-		}
+		checkIndicesBounds(i, j);
+		if (this.sitesOpen[xyTo1D(i, j)] == 1) return true;
 		return false;
 	}
 
@@ -79,6 +82,9 @@ public class Percolation {
 	}
 
 	public static void main(String[] args) {
-		
+		Percolation percol = new Percolation(5);
+		percol.open(1, 2);
+		percol.open(2, 2);
+		StdOut.println(percol.isFull(2, 2));
 	}
 }
