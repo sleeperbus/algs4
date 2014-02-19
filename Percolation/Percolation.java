@@ -53,13 +53,19 @@ public class Percolation {
 		for (int idx = 0; idx < this.size; idx++) {
 			this.uf.union(N*N, idx);
 		}
+
+		for (int idx = N*N - N; idx < N * N; idx++) {
+			this.uf.union(N*N + 1, idx);
+		}
 	}
 
 	// open site (row i, column j) if it is not already
 	public void open(int i, int j) {
 		checkIndicesBounds(i, j);
-		int idx = this.sitesOpen[xyTo1D(i, j)];
-		if (idx == 0) {
+		int idx = xyTo1D(i, j);
+		int status = this.sitesOpen[idx];
+		StdOut.printf("open (%d, %d) => %d\n", i, j, idx);
+		if (status == 0) {
 			this.sitesOpen[idx] = 1;
 		}
 		connectWithNeighbors(i, j);
@@ -115,5 +121,16 @@ public class Percolation {
         System.exit(0);        
 
 */        
+/*
+		Percolation percol = new Percolation(5);
+		percol.open(2, 1);
+		percol.open(2, 2);
+		percol.open(2, 3);
+		percol.open(2, 4);
+		StdOut.println(percol.percolates());
+		percol.open(2, 5);
+		StdOut.println(percol.percolates());
+		StdOut.println(percol.isFull(2,5));
+*/
 	}
 }
