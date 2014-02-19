@@ -23,18 +23,22 @@ public class Percolation {
 	private void connectWithNeighbors(int i, int j) {
 		// right
 		if (isBeyoundIndex(i+1, j) && isOpen(i+1, j)) {
+//            StdOut.println("1");
 			this.uf.union(xyTo1D(i, j), xyTo1D(i+1, j));
 		}
 		// left
 		if (isBeyoundIndex(i-1, j) && isOpen(i-1, j)) {
-			this.uf.union(xyTo1D(i, j), xyTo1D(1-i, j));
+//            StdOut.println("2");
+			this.uf.union(xyTo1D(i, j), xyTo1D(i-1, j));
 		}
 		// top
 		if (isBeyoundIndex(i, j-1) && isOpen(i, j-1)) {
+//            StdOut.println("3");
 			this.uf.union(xyTo1D(i, j), xyTo1D(i, j-1));
 		}
 		// bottom
 		if (isBeyoundIndex(i, j+1) && isOpen(i, j+1)) {
+//            StdOut.println("4");
 			this.uf.union(xyTo1D(i, j), xyTo1D(i, j+1));
 		}
 	}
@@ -82,9 +86,34 @@ public class Percolation {
 	}
 
 	public static void main(String[] args) {
-		Percolation percol = new Percolation(5);
-		percol.open(1, 2);
-		percol.open(2, 2);
-		StdOut.println(percol.isFull(2, 2));
+		int size = 5;
+		int count = 0;
+		int n1, n2;
+		Percolation percol = new Percolation(size);
+        percol.open(2,1);
+        StdOut.println(percol.percolates());
+        percol.open(2,2);
+        StdOut.println(percol.percolates());
+        percol.open(2,3);
+        StdOut.println(percol.percolates());
+        percol.open(2,4);
+        StdOut.println(percol.percolates());
+        percol.open(2,5);
+        StdOut.println(percol.percolates());
+
+/*
+        while (percol.percolates() == false) {
+            n1 = StdRandom.uniform(1, size);
+            n2 = StdRandom.uniform(1, size);
+            StdOut.printf("Open (%d, %d)\n", n1, n2);
+            if (percol.isOpen(n1, n2) == false) {
+                count++;
+                percol.open(n1, n2);
+            }            
+        }
+        StdOut.printf("%d by %d = %d, open sites are %d", size, size, size * size, count);
+        System.exit(0);        
+
+*/        
 	}
 }
