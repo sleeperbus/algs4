@@ -64,7 +64,7 @@ public class Percolation {
 		checkIndicesBounds(i, j);
 		int idx = xyTo1D(i, j);
 		int status = this.sitesOpen[idx];
-		StdOut.printf("open (%d, %d) => %d\n", i, j, idx);
+//		StdOut.printf("open (%d, %d) => %d\n", i, j, idx);
 		if (status == 0) {
 			this.sitesOpen[idx] = 1;
 		}
@@ -92,10 +92,13 @@ public class Percolation {
 	}
 
 	public static void main(String[] args) {
-		int size = 5;
+		int size = 20;
 		int count = 0;
 		int n1, n2;
+
 		Percolation percol = new Percolation(size);
+
+/*
         percol.open(2,1);
         StdOut.println(percol.percolates());
         percol.open(2,2);
@@ -106,31 +109,34 @@ public class Percolation {
         StdOut.println(percol.percolates());
         percol.open(2,5);
         StdOut.println(percol.percolates());
+*/        
 
-/*
         while (percol.percolates() == false) {
-            n1 = StdRandom.uniform(1, size);
-            n2 = StdRandom.uniform(1, size);
-            StdOut.printf("Open (%d, %d)\n", n1, n2);
+            n1 = StdRandom.uniform(1, size+1);
+            n2 = StdRandom.uniform(1, size+1);
             if (percol.isOpen(n1, n2) == false) {
                 count++;
+//	            StdOut.printf("Open (%d, %d)\n", n1, n2);
                 percol.open(n1, n2);
+//		        StdOut.println(percol.percolates());
             }            
         }
-        StdOut.printf("%d by %d = %d, open sites are %d", size, size, size * size, count);
+        StdOut.printf("%d by %d = %d, open sites are %d\n", size, size, size * size, count);
         System.exit(0);        
 
-*/        
 /*
 		Percolation percol = new Percolation(5);
 		percol.open(2, 1);
+		StdOut.println(percol.percolates());
 		percol.open(2, 2);
+		StdOut.println(percol.percolates());
 		percol.open(2, 3);
+		StdOut.println(percol.percolates());
 		percol.open(2, 4);
 		StdOut.println(percol.percolates());
 		percol.open(2, 5);
 		StdOut.println(percol.percolates());
 		StdOut.println(percol.isFull(2,5));
-*/
+*/		
 	}
 }
