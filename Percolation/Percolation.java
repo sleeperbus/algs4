@@ -12,6 +12,8 @@ public class Percolation {
         // connect virtual top to top rows
         for (int idx = 0; idx < this.size; idx++) {
             this.uf.union(N*N, idx);
+            StdOut.printf("(%d, %d) connected: %b\n", 
+				N*N, idx, this.uf.connected(N*N, idx));
         }
 
         for (int idx = N*N - N; idx < N * N; idx++) {
@@ -22,7 +24,9 @@ public class Percolation {
 
     // convert cordination to 1D Index.  x, y start from 1
     private int xyTo1D(int x, int y) {
-        return (x - 1) + (y - 1) * this.size;
+		int idx = (y - 1) + (x - 1) * this.size;
+		StdOut.printf("(%d, %d) to %d\n", x, y, idx);
+		return idx;
     }
 
     // check if indices are out of bounds
@@ -84,8 +88,8 @@ public class Percolation {
     // is site (row i, column j) full?
     public boolean isFull(int i, int j) {
         checkIndicesBounds(i, j);
-        if (this.isOpen(i, j) &&
-		this.uf.connected(this.size * this.size, xyTo1D(i, j)))
+        if (this.isOpen(i, j) 
+            && this.uf.connected(this.size * this.size, xyTo1D(i, j)))
             return true;
         return false;
     }
@@ -104,7 +108,9 @@ public class Percolation {
         int n1, n2;
 
         Percolation percol = new Percolation(size);
-        StdOut.println(percol.isFull(1,1));
+		percol.open(1, 6);
+		StdOut.println(percol.isOpen(1, 6));
+        StdOut.println(percol.isFull(1, 6));
         /*
         while (!percol.percolates()) {
             n1 = StdRandom.uniform(1, size+1);
