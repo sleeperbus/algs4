@@ -7,7 +7,7 @@ public class Percolation {
     public Percolation(int N) {
         // 2 is for virtual sites, top & bottom
         this.uf = new WeightedQuickUnionUF((N*N + 2));
-        this.ufTemp = new WeightedQuickUnionUF((N*N + 2));        
+        this.ufTemp = new WeightedQuickUnionUF((N*N + 1));        
         this.size = N;
         this.sitesOpen = new int[N*N];
     }
