@@ -45,37 +45,43 @@ public class Percolation {
 
     private void connectWithNeighbors(int i, int j) {
         // top
+        if (isBoundIndex(i-1, j) && isOpen(i-1, j)) {
+            this.uf.union(xyTo1D(i, j), xyTo1D(i-1, j));
+            this.ufTemp.union(xyTo1D(i, j), xyTo1D(i-1, j));
+        }
 
-		if (isBoundIndex(i-1, j) && isOpen(i-1, j))
-			this.uf.union(xyTo1D(i, j), xyTo1D(i-1, j));
-		// bottom
-		if (isBoundIndex(i+1, j) && isOpen(i+1, j))
-			this.uf.union(xyTo1D(i, j), xyTo1D(i+1, j));
-		// left
-		if (isBoundIndex(i, j-1) && isOpen(i, j-1))
-			this.uf.union(xyTo1D(i, j), xyTo1D(i, j-1));
-		// right
-		if (isBoundIndex(i, j-1) && isOpen(i, j-1))
-			this.uf.union(xyTo1D(i, j), xyTo1D(i, j-1));
-		// left
-		if (isBoundIndex(i, j-1) && isOpen(i, j-1))
-			this.uf.union(xyTo1D(i, j), xyTo1D(i, j-1));
-		// connect top and bottom node if (i, j) is top or bottom row
-		if (i == 0) {
-			this.uf.union(this.size*this.size, xyTo1D(i, j));
-			this.ufTemp.union(this.size*this.size, xyTo1D(i, j));
-		}
-		if (i == this.size) 
-			this.uf.union(this.size*this.size+1, xyTo1D(i, j));
+        // bottom
+        if (isBoundIndex(i+1, j) && isOpen(i+1, j)) {
+            this.uf.union(xyTo1D(i, j), xyTo1D(i+1, j));
+            this.ufTemp.union(xyTo1D(i, j), xyTo1D(i+1, j));
+        }
+
+        // left
+        if (isBoundIndex(i, j-1) && isOpen(i, j-1)) {
+            this.uf.union(xyTo1D(i, j), xyTo1D(i, j-1));
+            this.ufTemp.union(xyTo1D(i, j), xyTo1D(i, j-1));
+        }
+
+        // right
+        if (isBoundIndex(i, j+1) && isOpen(i, j+1)) {
+            this.uf.union(xyTo1D(i, j), xyTo1D(i, j+1));
+            this.ufTemp.union(xyTo1D(i, j), xyTo1D(i, j+1));
+        }
+
+        // connect top and bottom node if (i, j) is top or bottom row
+        if (i == 1) {
+            this.uf.union(this.size*this.size, xyTo1D(i, j));
+            this.ufTemp.union(this.size*this.size, xyTo1D(i, j));
+        }
+        if (i == this.size) 
+            this.uf.union(this.size*this.size+1, xyTo1D(i, j));
     }
 
     // open site (row i, column j) if it is not already
     public void open(int i, int j) {
         checkIndicesBounds(i, j);
-        int idx = xyTo1D(i, j);
-        if (this.sitesOpen[xyTo1D(i, j)] == 0) {
-        	this.sitesOpen[xyTo1D(i, j)] = 1;
-        }
+        if (this.sitesOpen[xyTo1D(i, j)] == 0) 
+            this.sitesOpen[xyTo1D(i, j)] = 1;
         connectWithNeighbors(i, j);
     }
 
