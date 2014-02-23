@@ -2,14 +2,14 @@ public class Percolation {
     private WeightedQuickUnionUF uf;
     private WeightedQuickUnionUF ufTemp;
     private int size;
-    private int[] sitesOpen;
+    private boolean[] sitesOpen;
 
     public Percolation(int N) {
         // 2 is for virtual sites, top & bottom
         this.uf = new WeightedQuickUnionUF((N*N + 2));
         this.ufTemp = new WeightedQuickUnionUF((N*N + 1));        
         this.size = N;
-        this.sitesOpen = new int[N*N];
+        this.sitesOpen = new boolean[N*N];
     }
 
     // connect to top
@@ -80,15 +80,15 @@ public class Percolation {
     // open site (row i, column j) if it is not already
     public void open(int i, int j) {
         checkIndicesBounds(i, j);
-        if (this.sitesOpen[xyTo1D(i, j)] == 0) 
-            this.sitesOpen[xyTo1D(i, j)] = 1;
+        if (!this.sitesOpen[xyTo1D(i, j)]) 
+            this.sitesOpen[xyTo1D(i, j)] = true;
         connectWithNeighbors(i, j);
     }
 
     // is site (row i, column j) open?
     public boolean isOpen(int i, int j) {
         checkIndicesBounds(i, j);
-        if (this.sitesOpen[xyTo1D(i, j)] == 1) return true;
+        if (this.sitesOpen[xyTo1D(i, j)]) return true;
         return false;
     }
 
