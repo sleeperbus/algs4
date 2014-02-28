@@ -3,7 +3,7 @@ public class Evaluate {
         Stack<String> ops = new Stack<String>();
         Stack<Double> vals = new Stack<Double>();
         while (!StdIn.isEmpty()) {
-            String s = Stdin.readString();
+            String s = StdIn.readString();
             if (s.equals("("))  ;
             else if (s.equals("+")) ops.push(s);
             else if (s.equals("*")) ops.push(s);
