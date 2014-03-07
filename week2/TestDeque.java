@@ -95,9 +95,18 @@ public class TestDeque {
 	}
 
 	public void testIterator() {
-		StdOut.println("removeLast test");
+		StdOut.println("iterator test");
 		Deque<Integer> deque = new Deque<Integer>();
 		
+		deque.addFirst(10);
+		deque.addFirst(20);
+		deque.addFirst(30);
+		
+		int sum = 0;
+		for (int n : deque) {
+			sum += n;
+		}
+		assertEquals(60, sum);		
 	}
 
 
@@ -110,6 +119,7 @@ public class TestDeque {
 		test.testAddLast();
 		test.testRemoveFirst();
 		test.testRemoveLast();
+		test.testIterator();
 	}
 	
 }
