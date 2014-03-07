@@ -8,7 +8,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	
 	private class Node<Item> {
 		Item item;
-		Node<Item> prev;
 		Node<Item> next;
 	}
 
@@ -24,7 +23,19 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	
 	public int size()                        // return the number of items on the queue
 	{ return N; }
+
 	public void enqueue(Item item)           // add the item
+	{
+		if (item == null) throw new NullPointerException();
+		Node<Item> oldlast = last;
+		last = new Node<Item>();
+		last.item = item;
+		last.next = null;
+		if (isEmpty()) first = last;
+		else oldlast.next = last;
+		N++;
+	}
+
 	public Item dequeue()                    // delete and return a random item
 	public Item sample()                     // return (but do not delete) a random item
 	public Iterator<Item> iterator()         // return an independent iterator over items in random order
