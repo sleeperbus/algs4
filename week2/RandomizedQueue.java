@@ -11,20 +11,23 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		Node<Item> next;
 	}
 
-	public RandomizedQueue()                 // construct an empty randomized queue
+	// construct an empty randomized queue
+	public RandomizedQueue()                 
 	{
 		N = 0;
 		prev = null;
 		next = null;
 	}
-	
-	public boolean isEmpty()                 // is the queue empty?
-	{ return (first == null || last == null); }
-	
-	public int size()                        // return the number of items on the queue
-	{ return N; }
 
-	public void enqueue(Item item)           // add the item
+	// is the queue empty?
+	public boolean isEmpty() 
+	{ return (first == null || last == null); }
+
+	// return the number of items on the queue	
+	public int size() { return N; }
+
+	// add the item
+	public void enqueue(Item item)
 	{
 		if (item == null) throw new NullPointerException();
 		Node<Item> oldlast = last;
@@ -42,7 +45,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		N++;
 	}
 
-	public Item dequeue()                    // delete and return a random item
+	// delete and return a random item
+	public Item dequeue()                    
 	{
 		if (isEmpty()) throw new NoSuchElementException("Under Flow");
 		Item item;
@@ -73,7 +77,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		
 		return item;		
 	}
-	public Item sample()                     // return (but do not delete) a random item
+
+	// return (but do not delete) a random item
+	public Item sample()                     
 	{
 		int rndNum = StdRandom.unifom(N);
 		Item item;
@@ -89,7 +95,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		return item;
 	}
 	
-	public Iterator<Item> iterator()         // return an independent iterator over items in random order
+	// return an independent iterator over items in random order
+	public Iterator<Item> iterator()         
 	{
 		return new RandomIterator<Item>();
 	}
@@ -98,6 +105,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	private class RandomIterator<Item> implements<Iterator> {
 		// create random Node list based on this RandomizedQueue
 		public RandomIterator() {
+			daum.
 			
 		}
 		
