@@ -56,13 +56,17 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		if (rndSel == 0) {
 			item = first.item;
 			first = first.next;
-			first.prev = null;
+			if (first != null) first.prev = null;
+			N--;
+			return item;
 		}
 		// if random number is last item
 		else if (rndSel == N-1) {
 			item = last.item;
 			last = last.prev;
 			last.next = null;
+			N--;
+			return item;
 		}
 		// if selected number is between node 1 to node N-1		
 		else {	
@@ -74,11 +78,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			}
 			item = current.item;
 			current.prev.next = current.next;			
+			N--;
+			return item;
 		}
-		
-		N--;
-		
-		return item;		
 	}
 
 	// return (but do not delete) a random item

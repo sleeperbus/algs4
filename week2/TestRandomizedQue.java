@@ -29,6 +29,31 @@ public class TestRandomizedQue {
 		assertEquals(2, randQue.size());
 	}
 
+	public void testEnqueue() {
+		StdOut.println("enqueue test");
+		RandomizedQueue<Integer> randQue = new RandomizedQueue<Integer>();
+
+		randQue.enqueue(10);
+		randQue.enqueue(20);
+		randQue.enqueue(30);
+		randQue.enqueue(40);
+		randQue.enqueue(50);
+		randQue.enqueue(60);
+		randQue.enqueue(70);
+		randQue.enqueue(80);
+		randQue.enqueue(90);
+
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.println("dequeue number: " + randQue.dequeue());
+	}
+
 
 	public static void main(String[] args) {
 
@@ -36,7 +61,10 @@ public class TestRandomizedQue {
 
 		test.testIsEmpty();
 		test.testSize();
+		test.testEnqueue();
 	}
+
+
 
 
 
