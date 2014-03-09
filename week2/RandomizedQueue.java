@@ -9,14 +9,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	private class Node<Item> {
 		Item item;
 		Node<Item> next;
+		Node<Item> prev;
 	}
 
 	// construct an empty randomized queue
 	public RandomizedQueue()                 
 	{
 		N = 0;
-		prev = null;
-		next = null;
+		first = null;
+		last = null;
 	}
 
 	// is the queue empty?
@@ -75,20 +76,24 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			current.prev.next = current.next;			
 		}
 		
+		N--;
+		
 		return item;		
 	}
 
 	// return (but do not delete) a random item
 	public Item sample()                     
 	{
-		int rndNum = StdRandom.unifom(N);
+		int rndNum = StdRandom.uniform(N);
 		Item item;
 		Node<Item> current = first;
 		if (rndNum == 0) item = current.item;
 		else {
+			int n = 1;
+			current = current.next;
 			while ( n != rndNum) {
-				n++;				
 				current = current.next;
+				n++;				
 			}
 			item = current.item;
 		}
@@ -96,30 +101,47 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	}
 	
 	// return an independent iterator over items in random order
-	public Iterator<Item> iterator()         
-	{
-		return new RandomIterator<Item>();
+	public Iterator<Item> iterator() { 
+		return new RandomIterator<Item>(N, first); 
 	}
 	
 	// helper class
-	private class RandomIterator<Item> implements<Iterator> {
+	private class RandomIterator<Item> implements Iterator<Item> {
+		private Item[] items;
+		private int index;
+
 		// create random Node list based on this RandomizedQueue
-		public RandomIterator() {
-			daum.
-			
+		public RandomIterator(int arrSize, Node<Item> first) {
+			items = (Item[]) new Object[arrSize];
+			Node<Item> current = first;
+			index = 0;
+
+			while (current != null) {
+				items[index] = current.item;
+				current = current.next;
+				index++;
+			}
+
+			// shuffle
+			index = 0;
+			StdRandom.shuffle(items);
 		}
 		
-		public boolean hasNext() {
-			
-		}
+		public boolean hasNext() { return index+1 >= items.length; }
+		public void remove() { throw new UnsupportedOperationException(); }
 		
 		public Item next() {
-			
+			if (!hasNext()) throw new NoSuchElementException();
+			Item item = items[index];
+			index++;
+			return item;
 		}
-		
 	}
 	
 	
 	public static void main(String[] args)   // unit testing
+	{
+
+	}
 	
 }
