@@ -50,38 +50,35 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item dequeue()                    
     {
         if (isEmpty()) throw new NoSuchElementException("Under Flow");
-        Item item;
         int rndSel = StdRandom.uniform(N);
-        // if random number is first item
-        if (rndSel == 0) {
-            item = first.item;
-            first = first.next;
-            if (first != null) first.prev = null;
-            else last = null;
-            N--;
-            return item;
+
+        Node<Item> current = first;
+        while (rndSel > 0) {
+            current = current.next;
+            rndSel--;
         }
-        // if random number is last item
-        else if (rndSel == N-1) {
-            item = last.item;
-            last = last.prev;
-            last.next = null;
-            N--;
-            return item;
-        }
-        // if selected number is between node 1 to node N-1     
-        else {  
-            Node<Item> current = first.next;        
-            int n = 1;
-            while (n != rndSel) {
-                current = current.next;
-                n++;
+        Item item = current.item;
+
+        // if last node
+        if (N == 1) {
+            first = null;
+            last = null;
+        } 
+        else {
+            // if first node
+            if (current.prev == null) {
+                first = current.next;
+                first.prev = null;
             }
-            item = current.item;
-            current.prev.next = current.next;           
-            N--;
-            return item;
+            else {
+                if (current.next == null) last = current.prev;
+                current.prev.next = current.next;
+            }
         }
+
+        N--;
+
+        return item;
     }
 
     // return (but do not delete) a random item

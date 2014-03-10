@@ -35,16 +35,13 @@ public class TestRandomizedQue {
 
 		randQue.enqueue(10);
 		randQue.enqueue(10);
-		randQue.dequeue();
-		randQue.dequeue();
 		randQue.enqueue(20);
-		randQue.dequeue();
 		randQue.enqueue(30);
-		randQue.dequeue();
 		randQue.enqueue(40);
 		randQue.dequeue();
-		randQue.enqueue(50);
 		randQue.dequeue();
+
+		StdOut.printf("remain: %d\n", randQue.size());
 	}
 
 	public void testSample() {
