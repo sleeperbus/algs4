@@ -129,7 +129,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			StdRandom.shuffle(items);
 		}
 		
-		public boolean hasNext() { return index+1 >= items.length; }
+		public boolean hasNext() { return index <= items.length - 1; }
 		public void remove() { throw new UnsupportedOperationException(); }
 		
 		public Item next() {

@@ -95,7 +95,7 @@ public class TestRandomizedQue {
 		randQue.enqueue(90);
 
 		for (int n : randQue) {
-			StdOut.printf("rand num: %n\n", n);
+			StdOut.printf("rand num: %d\n", n);
 		}
 
 	}
