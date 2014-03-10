@@ -30,28 +30,21 @@ public class TestRandomizedQue {
 	}
 
 	public void testEnqueueAndDequeue() {
-		StdOut.println("enqueue test");
+		StdOut.println("enqueue and dequeue test");
 		RandomizedQueue<Integer> randQue = new RandomizedQueue<Integer>();
 
 		randQue.enqueue(10);
+		randQue.enqueue(10);
+		randQue.dequeue();
+		randQue.dequeue();
 		randQue.enqueue(20);
+		randQue.dequeue();
 		randQue.enqueue(30);
+		randQue.dequeue();
 		randQue.enqueue(40);
+		randQue.dequeue();
 		randQue.enqueue(50);
-		randQue.enqueue(60);
-		randQue.enqueue(70);
-		randQue.enqueue(80);
-		randQue.enqueue(90);
-
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
+		randQue.dequeue();
 	}
 
 	public void testSample() {
@@ -68,16 +61,6 @@ public class TestRandomizedQue {
 		randQue.enqueue(80);
 		randQue.enqueue(90);
 
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
 	}
 
 	public void testIterator() {
@@ -105,11 +88,7 @@ public class TestRandomizedQue {
 
 		TestRandomizedQue test = new TestRandomizedQue();
 
-		test.testIsEmpty();
-		test.testSize();
 		test.testEnqueueAndDequeue();
-		test.testSample();
-		test.testIterator();
 	}
 
 
