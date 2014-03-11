@@ -34,13 +34,16 @@ public class TestRandomizedQue {
 		RandomizedQueue<Integer> randQue = new RandomizedQueue<Integer>();
 
 		randQue.enqueue(10);
-		randQue.enqueue(10);
 		randQue.enqueue(20);
 		randQue.enqueue(30);
 		randQue.enqueue(40);
-		randQue.dequeue();
-		randQue.dequeue();
+		randQue.enqueue(50);
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
 
+		StdOut.printf("sample: %d\n", randQue.sample());
 		StdOut.printf("remain: %d\n", randQue.size());
 	}
 

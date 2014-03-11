@@ -3,7 +3,6 @@ import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
     private Node<Item> first;
-    private Node<Item> last;
     private int N;
     
     private class Node<Item> {
@@ -17,12 +16,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     {
         N = 0;
         first = null;
-        last = null;
     }
 
     // is the queue empty?
     public boolean isEmpty() 
-    { return (first == null || last == null); }
+    { return first == null; }
 
     // return the number of items on the queue  
     public int size() { return N; }
@@ -31,20 +29,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public void enqueue(Item item)
     {
         if (item == null) throw new NullPointerException();
-        Node<Item> oldlast = last;
-        last = new Node<Item>();
-        last.item = item;
-        last.next = null;
-        if (isEmpty()) {
-            first = last;
-            last.prev = null;
-        }
-        else {
-            oldlast.next = last;
-            last.prev = oldlast;            
-        }
+        Node<Item> oldfirst = first;
+        first = new Node<Item>();
+        first.item = item;
+        first.next = oldfirst;
         N++;
-    }
+   }
 
     // delete and return a random item
     public Item dequeue()                    
@@ -52,38 +42,29 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException("Under Flow");
         int rndSel = StdRandom.uniform(N);
 
-        Node<Item> current = first;
-        while (rndSel > 0) {
-            current = current.next;
-            rndSel--;
+        Node<Item> prev = null;
+        Node<Item> current = null;
+        for (int i = 0; i <= rndSel; i++) {
+            prev = current;
+            if (i == 0) current = first;
+            else current = current.next;
         }
+
         Item item = current.item;
 
-        // if last node
-        if (N == 1) {
-            first = null;
-            last = null;
-        } 
-        else {
-            // if first node
-            if (current.prev == null) {
-                first = current.next;
-                first.prev = null;
-            }
-            else {
-                if (current.next == null) last = current.prev;
-                current.prev.next = current.next;
-            }
-        }
+        if (N == 1) first = null;
+        else if (N != 1 && rndSel == 0) first = current.next;
+
+        if (prev != null) prev.next = current.next;
 
         N--;
-
         return item;
     }
 
     // return (but do not delete) a random item
     public Item sample()                     
     {
+        if (isEmpty()) throw new NoSuchElementException("Under flow");
         int rndNum = StdRandom.uniform(N);
         Item item;
         Node<Item> current = first;
