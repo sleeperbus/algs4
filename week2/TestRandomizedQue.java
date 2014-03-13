@@ -30,7 +30,7 @@ public class TestRandomizedQue {
 	}
 
 	public void testEnqueueAndDequeue() {
-		StdOut.println("enqueue test");
+		StdOut.println("enqueue and dequeue test");
 		RandomizedQueue<Integer> randQue = new RandomizedQueue<Integer>();
 
 		randQue.enqueue(10);
@@ -38,20 +38,13 @@ public class TestRandomizedQue {
 		randQue.enqueue(30);
 		randQue.enqueue(40);
 		randQue.enqueue(50);
-		randQue.enqueue(60);
-		randQue.enqueue(70);
-		randQue.enqueue(80);
-		randQue.enqueue(90);
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
+		StdOut.printf("rand num: %d\n", randQue.dequeue());
 
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
-		StdOut.println("dequeue number: " + randQue.dequeue());
+		StdOut.printf("sample: %d\n", randQue.sample());
+		StdOut.printf("remain: %d\n", randQue.size());
 	}
 
 	public void testSample() {
@@ -68,16 +61,6 @@ public class TestRandomizedQue {
 		randQue.enqueue(80);
 		randQue.enqueue(90);
 
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
-		StdOut.printf("rand: %d\n", randQue.sample());
 	}
 
 	public void testIterator() {
@@ -95,7 +78,7 @@ public class TestRandomizedQue {
 		randQue.enqueue(90);
 
 		for (int n : randQue) {
-			StdOut.printf("rand num: %n\n", n);
+			StdOut.printf("rand num: %d\n", n);
 		}
 
 	}
@@ -105,11 +88,7 @@ public class TestRandomizedQue {
 
 		TestRandomizedQue test = new TestRandomizedQue();
 
-		test.testIsEmpty();
-		test.testSize();
 		test.testEnqueueAndDequeue();
-		test.testSample();
-		test.testIterator();
 	}
 
 
