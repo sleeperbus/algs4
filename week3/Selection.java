@@ -27,12 +27,12 @@ public class Selection {
      */
     public static void sort(Object[] a, Comparator c) {
         int N = a.length;
-        for (int i = 0; i < N) {
-            int mint = i;
+        for (int i = 0; i < N; i++) {
+            int min = i;
             for (int j = i+1; j < N; j++) {
                 if (less(c, a[j], a[min])) min = j;
             }
-            exch(a, i, min)
+            exch(a, i, min);
             assert isSorted(a, c, 0, i);
         }
         assert isSorted(a, c);
@@ -53,7 +53,7 @@ public class Selection {
     }
 
     // exchange a[i] and a[j]
-    private static void exch(Object[], int i, int j) {
+    private static void exch(Object[] a, int i, int j) {
         Object swap = a[i];
         a[i] = a[j];
         a[j] = swap;
@@ -69,6 +69,7 @@ public class Selection {
         return isSorted(a, 0, a.length - 1);
     }
 
+    // is the array sorted from a[lo] to a[hi]
     private static boolean isSorted(Comparable[] a, int lo, int hi) {
         for (int i = lo + 1; i <= hi; i++) {
             if (less(a[i], a[i-1])) return false;
@@ -76,12 +77,19 @@ public class Selection {
         return true;
     }
 
-    private static boolean isSorted(Object[] a, Comparator c, int lo, int c) {
+    // is the array a[] sorted
+    private static boolean isSorted(Object[] a, Comparator c) {
+        return isSorted(a, c, 0, a.length - 1);
+    }
+
+    // is the array sorted a[lo] to a[hi]
+    private static boolean isSorted(Object[] a, Comparator c, int lo, int hi) {
         for (int i = lo + 1; i <= hi; i++)
             if (less(c, a[i], a[i-1])) return false;
         return true;
     }
 
+    // print array to standard ouptput
     private static void show(Comparable[] a) {
         for (int i = 0; i < a.length; i++) {
             StdOut.println(a[i]);
@@ -90,7 +98,7 @@ public class Selection {
 
 
     public static void main(String[] args) {
-        String[] a = StdIn.readAllString();
+        String[] a = StdIn.readAllStrings();
         Selection.sort(a);
         show(a);
     }
