@@ -1,5 +1,6 @@
 import java.util.Comparator;
 
+
 public class Insertion {
     // This class should not be instantiated.
     private Insertion() { }
